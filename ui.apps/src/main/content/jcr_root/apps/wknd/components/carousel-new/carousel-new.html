@@ -1,0 +1,43 @@
+<h2>Carousel Component</h2>
+<sly data-sly-use.model="com.adobe.aem.guides.wknd.core.models.CarouselModel"/>
+
+ <sly data-sly-use.clientlib="core/wcm/components/commons/v1/templates/clientlib.html">
+  <sly data-sly-call="${clientlib.all @ categories='carousel-new'}"/>
+</sly>
+
+
+<sly data-sly-list="${model.pagemultiList}">
+   <h3> title: ${item.imagepath} </h3>
+   <h3> index: ${itemList.index} </h3>
+   <h3>  count: ${itemList.count} </h3>
+</sly>
+
+<main class="carousel-container">
+  <div class="carousel" data-sly-list="${model.pagemultiList}">
+
+	<sly data-sly-test.isFirst="${itemList.index==0}">
+        <div class="item active" >
+          <img src=${item.imagepath} alt="${model.altimage}" />
+          <p class="caption">${model.caption}</p>
+        </div>
+    </sly>
+
+    <sly data-sly-test="${!isFirst}">
+        <div class="item" >
+          <img src=${item.imagepath} alt="${model.altimage}" />
+          <p class="caption">${model.caption}</p>
+        </div>
+    </sly>
+
+
+  </div>
+  <button class="btn prev">Prev</button>
+  <button class="btn next">Next</button>
+  <div class="dots"></div>
+</main>
+
+
+
+
+
+
