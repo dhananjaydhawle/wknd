@@ -4,9 +4,7 @@ import com.adobe.xfa.ut.StringUtils;
 import com.google.gson.Gson;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
-import org.apache.sling.api.resource.Resource;
-import org.apache.sling.api.resource.ResourceResolver;
-import org.apache.sling.api.resource.ValueMap;
+import org.apache.sling.api.resource.*;
 import org.apache.sling.api.servlets.SlingSafeMethodsServlet;
 import org.apache.sling.servlets.annotations.SlingServletPaths;
 import org.osgi.service.component.annotations.Component;
@@ -51,13 +49,37 @@ public class ChildPage extends SlingSafeMethodsServlet {
                 String name = childResourceJCR.getName();
                 String path = childResourceJCR.getPath();
                 String title = null;
+                String  newproperties  = null;
+                String  ghithub = null;
+
+
+
+
 
                 if(jcrResource != null){
                     ValueMap childJCRVM = jcrResource.adaptTo(ValueMap.class);
                     title = childJCRVM.get("jcr:title", String.class);
+                    ghithub = childJCRVM.get("git", String.class);
+                    newproperties = childJCRVM.get("myproperty", String.class);
+
+
+
+                    ModifiableValueMap mf = jcrResource.adaptTo(ModifiableValueMap.class);
+                    if (mf != null) {
+                        mf.put("git", "pushpull");
+                        mf.put("myproperty", "text");
+                        try {
+
+                            resourceResolver.commit();
+                        } catch (PersistenceException e) {
+                            response.getWriter().write("Error while saving properties: " + e.getMessage());
+                        }
+                    }
+
+
                 }
 
-                PageJSON pageJSON = new PageJSON(title, path, name);
+                PageJSON pageJSON = new PageJSON(title, path, name ,  ghithub ,newproperties);
                 resultDataList.add(pageJSON);
             }
         }
@@ -69,11 +91,19 @@ public class ChildPage extends SlingSafeMethodsServlet {
         String title;
         String path;
         String name;
+        String  ghithub;
+        String newproperties;
 
-        public PageJSON(String title, String path, String name) {
+
+
+
+        public PageJSON(String title, String path, String name,String  ghithub, String newproperties) {
             this.title = title;
             this.path = path;
             this.name = name;
+            this. ghithub =  ghithub;
+            this.newproperties = newproperties;
+
         }
 
         public String getTitle() {
@@ -86,6 +116,14 @@ public class ChildPage extends SlingSafeMethodsServlet {
 
         public String getName() {
             return name;
+        }
+
+        public String getghithub() {
+            return  ghithub;
+        }
+
+        public String getNewproperties() {
+            return newproperties;
         }
     }
 
