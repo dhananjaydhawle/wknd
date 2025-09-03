@@ -1,0 +1,27 @@
+second component- accordian
+<sly data-sly-use.model="com.adobe.aem.guides.wknd.core.models.AccordianNewModel"/>
+
+
+ <sly data-sly-use.clientlib="core/wcm/components/commons/v1/templates/clientlib.html">
+  <sly data-sly-call="${clientlib.all @ categories='accordian-new'}"/>
+</sly>
+
+
+
+
+<section class="accordion" aria-label="FAQ">
+  
+  <!-- Accordion Title -->
+  <h2 class="accordion__title">${model.title}</h2>
+
+  <!-- Loop Accordion Items -->
+  <sly data-sly-list.item="${model.bookListMulti}">
+    <details class="accordion__item">
+      <summary class="accordion__trigger">${item.question}</summary>
+      <div class="accordion__panel">
+        <p>${item.answer}</p>
+      </div>
+    </details>
+  </sly>
+</section>
+

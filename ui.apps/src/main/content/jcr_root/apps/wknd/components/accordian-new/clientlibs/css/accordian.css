@@ -1,0 +1,71 @@
+
+/* Simple reset */
+* { box-sizing: border-box; }
+body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; line-height: 1.45; padding: 24px; background:#f7f8fb; color:#111; }
+
+/* Accordion layout */
+.accordion { max-width: 760px; margin: 0 auto; }
+.accordion__title { margin: 0 0 12px; font-size: 1.25rem; }
+
+/* Remove default marker and style summary */
+.accordion__item { background: #fff; border-radius: 10px; margin: 8px 0; box-shadow: 0 1px 3px rgba(20,20,40,0.04); overflow: hidden; border: 1px solid rgba(16,24,40,0.05); }
+
+/* summary is focusable by default; style it like a button */
+.accordion__trigger {
+  list-style: none; /* remove triangle marker */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  font-weight: 600;
+  font-size: 1rem;
+  user-select: none;
+  outline: none;
+  color: #0f172a;
+  background: transparent;
+  border: none;
+}
+
+/* Arrow indicator using ::after */
+.accordion__trigger::after {
+  content: "▸";
+  font-size: 0.88rem;
+  transition: transform 180ms ease, opacity 120ms ease;
+  transform-origin: 50% 50%;
+  opacity: 0.95;
+}
+
+/* rotate arrow when open */
+.accordion__item[open] > .accordion__trigger::after {
+  transform: rotate(90deg);
+}
+
+/* focus ring for keyboard users */
+.accordion__trigger:focus {
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.18);
+  border-radius: 8px;
+}
+
+/* Panel reveal — animate using max-height for smoothness */
+.accordion__panel {
+  padding: 0 18px;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 260ms ease, padding 180ms ease;
+}
+
+/* When open, allow content to expand. big max-height to comfortably fit content */
+.accordion__item[open] > .accordion__panel {
+  padding: 12px 18px 18px;
+  max-height: 600px;
+}
+
+/* Paragraph inside panel */
+.accordion__panel p { margin: 0; color: #334155; }
+
+/* Small responsive tweak */
+@media (max-width: 520px) {
+  .accordion__trigger { padding: 14px 16px; }
+  .accordion__panel { padding: 0 16px; }
+}
