@@ -23,10 +23,8 @@ public class MyNewModel {
     @ValueMapValue
     private String title;
 
-
     @SlingObject
     private ResourceResolver resourceResolver;
-
 
     @OSGiService
     TestService testService;
@@ -35,11 +33,8 @@ public class MyNewModel {
 
     @PostConstruct
     public void init() {
-
         pageTitles = new ArrayList<>();
-
         if (title != null && resourceResolver != null && testService != null) {
-
             Resource pageRes = resourceResolver.getResource(title);
             if (pageRes != null) {
                 Page selectedPage = pageRes.adaptTo(Page.class);
@@ -49,8 +44,6 @@ public class MyNewModel {
                 }
             }
         }
-
-
     }
 
     public ArrayList<String> getPageTitles() {
