@@ -11,6 +11,4 @@ public interface PageService {
 
     //using hashmap
     Map<String, String> getChildPageMap(Page currentPage);
-
-
 }

@@ -1,0 +1,44 @@
+<head>
+  <meta charset="UTF-8">
+  <title>Slick Carousel Example</title>
+
+  <!-- Slick CSS -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+  Slick Carousel component.
+   <sly data-sly-use.clientlib="core/wcm/components/commons/v1/templates/clientlib.html">
+  <sly data-sly-call="${clientlib.all @ categories='slick-carousel'}"/>
+</sly>
+
+<sly data-sly-use.carouselModel="com.adobe.aem.guides.wknd.core.models.SlickCarouselModel" />
+
+<div class="wrapper">
+  <h2>Slick Carousel Example</h2>
+
+  <div class="carousel">
+    <sly data-sly-list.item="${carouselModel.CarouselItems}">
+      <div class="carousel-slide">
+        <img src="${item.imagePath @ context='uri'}" alt="${item.caption}" />
+      </div>
+    </sly>
+  </div>
+</div>
+
+<!-- Load clientlibs (for slick CSS + JS + init) -->
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
+     data-sly-call="${clientlib.all @ categories='wknd.slickcarousel'}"/>
+
+
+       <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Slick JS -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+  <!-- Custom JS -->
+  <script src="script.js"></script>

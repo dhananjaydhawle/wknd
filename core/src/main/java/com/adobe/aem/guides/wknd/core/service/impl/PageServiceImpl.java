@@ -16,21 +16,17 @@ public class PageServiceImpl implements PageService {
     public ArrayList<String> getchildPageName(Page page) {
         ArrayList<String> pageName = new ArrayList<>();
 
-
         Iterator<Page> itr = page.listChildren();
-        while (itr.hasNext()){
+        while (itr.hasNext()) {
             Page childPage = itr.next();
             String name = childPage.getName();
             pageName.add(name);
         }
         return pageName;
-
-
     }
 
-
     @Override
-    public Map<String, String> getChildPageMap(Page currentPage ) {
+    public Map<String, String> getChildPageMap(Page currentPage) {
         Map<String, String> childPageMap = new HashMap<>();
 
         if (currentPage != null) {
@@ -45,5 +41,4 @@ public class PageServiceImpl implements PageService {
 
         return childPageMap;
     }
-
 }
