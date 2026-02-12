@@ -15,6 +15,10 @@ public class AccordianMultiData {
     @ValueMapValue
     String answer;
 
+
+    @ValueMapValue
+    String dhananjay;
+
     public String getQuestion() {
         return question;
     }
